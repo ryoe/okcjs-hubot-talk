@@ -1,4 +1,7 @@
 okcjs-hubot-talk
 ================
 
-Slides from OKC.js Lightning Talks
+Here are the slides from my OKC.js Lightning Talk.
+
+View the slideshow at [http://ryoe.github.io/okcjs-hubot-talk/](http://ryoe.github.io/okcjs-hubot-talk/)
+
