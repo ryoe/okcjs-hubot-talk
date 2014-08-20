@@ -1,0 +1,44 @@
+.strike {
+	color: gray;
+}
+.bigger {
+	font-size: 30px;
+	line-height: 32px;
+}
+.less-bigger {
+	font-size: 28px !important;
+	line-height: 30px !important;
+}
+.middle {
+	font-size: 24px !important;
+	line-height: 26px !important;
+}
+.smaller {
+	font-size: 20px !important;
+	line-height: 22px !important;
+}
+li.no-disc {
+	list-style-type: none;
+}
+.pull-left, .pull-right {
+	display: inline-block;
+	float: left;
+	margin-right: 20px !important;
+}
+div.center-me {
+	display: inline-block;
+	width: 400px;
+	margin: auto;
+}
+code, li.code {
+	color: lightgreen;
+}
+pre {
+	font-size: 28px !important;
+}
+.reveal pre {
+	width: 95%;
+}
+ol > li {
+	margin-top: 10px !important;
+}

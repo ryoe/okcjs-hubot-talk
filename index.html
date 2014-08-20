@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Hubot Scripts: How to train your robot</title>
+
+		<meta name="description" content="An OKC.js lightning talk">
+		<meta name="author" content="Rick Yoesting">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="css/overrides.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Hubot Scripts:</h1>
+					<h2>How to train your robot</h2>
+					<h3>&nbsp;</h3>
+					<h3>An OKC.js lightning talk</h3>
+					<h4>August 19, 2014</h4>
+					<h6>&nbsp;</h6>
+					<h4><strike>A backyard.js talk</strike></h4>
+					<h5><strike>July 26, 2014</strike> - Canceled, the mystery lives on</h5>
+					<h6>&nbsp;</h6>
+					<h4><strike>An OKC.js lightning talk</strike></h4>
+					<h5><strike>May 20, 2014</strike> - Canceled due to strep!</h5>
+					<p>
+						<small><a href="http://twitter.com/ryoe_ok">Rick Yoesting</a> / <a href="http://twitter.com/ryoe_ok">@ryoe_ok</a></small>
+					</p>
+				</section>
+				<section>
+					<h2>Meet Our Hero</h2>
+					<img width="200" height="200" src="images/hubot-featured.png" alt="Hubot picture">
+					<p>
+						<ul>
+							<li class="fragment">Created to automate chat</li>
+							<li class="fragment">Runs on Node!</li>
+							<li class="fragment">Many chat adapters available</li>
+						</ul>
+					</p>
+
+					<aside class="notes">
+					* invented by GitHub to automate company via chat (ChatOps)
+					* node.js ecosystem already has tons of libraries
+					* npm
+					* lots of scripts already available
+					* easy to extend with your own custom scripts
+					</aside>
+				</section>
+					<section>
+						<h2>Why Hubot?</h2>
+						<p class="fragment">
+							<strong>Use #1</strong> - Entertainment!
+						</p>
+					</section>
+					<section>
+						<h2>mustache me</h2>
+						<p><code>hubot mustache me Rick Yoesting</code></p>
+					</section>
+					<section>
+						<img width="544" height="609" src="images/mustache-me-rick-crop.png" alt="Rick Yoesting mustache me image">
+					</section>
+					<section>
+						<h2>pug bomb</h2>
+						<p><code>hubot pug bomb 3</code></p>
+					</section>
+					<section>
+						<img width="642" height="776" src="images/pug-bomb.png" alt="hubot pug bomb 3 image">
+					</section>
+
+				<section>
+					<h2>So, Why Hubot?</h2>
+					<p class="fragment">
+						<strong>Use #2</strong> - "Real Work"!
+					</p>
+				</section>
+				<section>
+					<h2>"Real Work" Examples</h2>
+					<p>Integrate with issue tracker</p>
+					<p class="fragment">Deploy/rollback software</p>
+					<p class="fragment">Alter BGP routing to mitigate DDoS attack<sup>*</sup>
+
+						<br/>
+						<br/>
+						<br/>
+						<small><a href="https://www.youtube.com/watch?v=pCVvYCjvoZI"><sup>*</sup> ChatOps: Augmented Reality for Ops by Mark Imbriaco</a></small>
+					</p>
+
+					<aside class="notes">
+					* BGP routing example from Mark Imbriaco in ChatOps talk while he was a GitHub
+					* ChatOps: Augmented Reality for Ops - Presentation at the Velocity New York conference on Thursday, October 15, 2013.
+					* https://www.youtube.com/watch?v=pCVvYCjvoZI
+					</aside>
+				</section>
+				<section>
+					<h2>Benefits</h2>
+					<p>Transparency</p>
+					<p class="fragment">Repeatable</p>
+					<p class="fragment">The tools are where you're already working</p>
+					<p class="fragment">Training is "free"</p>
+					<aside class="notes">
+						* 
+					</aside>
+				</section>
+				<section>
+					<h2>CoffeeScript</h2>
+					<h2>&nbsp;</h2>
+					<p>Love it or hate it, you can't avoid it!</p>
+					<h2>&nbsp;</h2>
+					<div class="fragment">
+							<p class="fragment1">Hubot is written in CoffeeScript</p>
+							<p class="fragment1">Most Hubot scripts are in CoffeeScript</p>
+							<p class="fragment1">At a minimum, you will <b>read</b> CoffeeScript</p>
+					</div>
+				</section>
+				<section>
+					<h2>Regular Expressions</h2>
+					<h2>&nbsp;</h2>
+					<p>Love 'em or hate 'em, you can't avoid 'em!</p>
+					<h2>&nbsp;</h2>
+					<div class="fragment">
+							<p class="fragment1">RegEx - it's how routing gets done in Hubot</p>
+							<p class="fragment1"><a href="http://scriptular.com"/>Scriptular</a> - like Rubular, but for JS</p>
+							<p class="fragment1">Bonus: your regex skills <b>will improve</b></p>
+						
+					</div>
+				</section>
+				<!-- Example of nested vertical slides -->
+				<section>
+					<h2>Install Hubot</h2>
+					<p>
+						<ul>
+							<li>Install <strong>node.js</strong> and <strong>npm</strong><sup><strong>*</strong></sup> 
+								</li>
+							<li>Install <strong>hubot</strong> and <strong>coffee-script</strong> modules globally
+<br/>	
+					<code class="bigger" data-trim contenteditable>
+<br/> > [sudo] npm install -g hubot coffee-script
+
+					</code>
+						</li>
+						</ul>
+		
+					</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>
+						<small><a href="http://www.joyent.com/blog/installing-node-and-npm"><sup>*</sup> http://www.joyent.com/blog/installing-node-and-npm</a></small>
+					</p>
+				</section>
+
+<!-- let's inline not do vertical here...
+				<section>
+				-->
+					<section>
+						<h2>Create your robot</h2>
+						<p>
+							<ul>
+								<li class="fragment no-disc">
+						<code class="bigger" data-trim contenteditable>
+	<br/> > hubot -c my-bot
+	<br/> > cd my-bot
+	<br/>my-bot > npm install
+						</code>
+								</li>
+								<li class="fragment no-disc">
+						<code class="bigger" data-trim contenteditable>
+	<br/>my-bot > bin/hubot
+	<br/>Hubot > hubot ping
+	<br/>Hubot > PONG
+						</code>
+								</li>
+							</ul>
+						</p>
+						<p>&nbsp;</p>
+						<p class="fragment">Now you've got a <strong>Hubot</strong> using the default <strong>Shell</strong> adapter.
+						</p>
+					</section>
+					<section>
+						<h2>Name your robot</h2>
+						<p>Name your Hubot with <code> --name</code>.
+						</p>
+						<p>
+							<ul>
+								<li class="no-disc fragment">
+						<code class="bigger" data-trim contenteditable>
+	<br/> my-bot > bin/hubot --name okcjs-bot
+	<br/> okcjs-bot > hubot ping
+	<br/> okcjs-bot > hubot ping
+	<br/> okcjs-bot > hubot ping
+	</code>
+	<br/><br/>Notice that Hubot doesn't respond unless called by <code>name</code>.
+							</li>
+								<li class="no-disc fragment">
+						<code class="less-bigger" data-trim contenteditable>
+	<br/> okcjs-bot > okcjs-bot ping
+	<br/> okcjs-bot > PONG</code>
+								</li>
+							</ul>
+						</p>
+					</section>
+					<!-- no more vertical for the naming..
+				</section>-->
+				<section>
+					<h2>Make your robot a chat bot</h2>
+					<p>Because <b>Hubot</b> is better with friends!</p>
+					<p><br/></p>
+						<p>Let's wire up to <b>HipChat</b>!
+											<code class="bigger" data-trim contenteditable>
+<br/> > [sudo] npm install --save hubot-hipchat
+</code>
+					</p>
+				</section>
+				<section>
+					<h2>Configure HipChat adapter</h2>
+<p>
+						<ul>
+							<li class="no-disc fragment1"><br/>Set some envionment variables...<br/>
+
+<code class="bigger1 less-bigger">
+ export HUBOT_HIPCHAT_JID="123456_987654@chat.hipchat.com"
+<br/> export HUBOT_HIPCHAT_PASSWORD="password"
+<br/> export HUBOT_HIPCHAT_ROOMS="123456_demo@conf.hipchat.com"
+</code>
+</li></ul>
+</p>
+</section>
+<section>
+	<h2>Run Hubot</h2>
+<p class="fragment1">
+
+							<ul class="fragment1">
+							<li class="no-disc fragment1"><br/>Start up Hubot with <b>HipChat</b> adapter...<br/><br/>
+
+<code class="less-bigger">
+ my-bot > sudo bin/hubot --adapter hipchat
+<br/> Starting Hubot...
+
+<br/> [...date...] INFO Connecting HipChat adapter...
+<br/> [...date...] INFO Connected to hipchat.com as @hubot
+<br/> [...date...] INFO Joining 123456_demo@conf.hipchat.com
+</code>
+</li></ul>
+</p>	
+				</section>
+				<section>
+					<h2>So you don't use/like HipChat...</h2>
+					<p>&nbsp;</p>
+					<p>Plenty of other adapters to choose from! <sup>*</sup></p>
+					<div class="center-me">
+						<div class="pull-left">
+							<ul>
+								<li>Flowdock</li>
+								<li>IRC</li>
+								<li>Partychat</li>
+								<li>Talker</li>
+								<li>Twilio</li>
+								<li>Twitter</li>
+								<li>XMPP</li>
+								<li>Gtalk</li>
+								<li class="code"><i>Yammer</i></li>
+							</ul>
+						</div>
+						<div class="pull-right">
+							<ul>
+								<li class="code"><i>Skype</i></li>
+								<li>Jabbr</li>
+								<li>iMessage</li>
+								<li>Hall</li>
+								<li>ChatWork</li>
+								<li>QQ</li>
+								<li>AIM</li>
+								<li class="code"><i>Slack</i></li>
+								<li>Lingr</li>
+							</ul>
+						</div>
+					</div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+										<p>
+						<small><a href="https://github.com/github/hubot/blob/master/docs/adapters.md"><sup>*</sup> https://github.com/github/hubot/blob/master/docs/adapters.md</a></small>
+					</p>
+
+				</section>
+				<section>
+					<h2>Installing Hubot Scripts</h2>
+					<p>
+						<ol>
+							<li>npm module <code>hubot-scripts</code> installed by default
+								<ul>
+									<li>Edit <code>hubot-scripts.json</code> to register the script you want to use</li>
+								</ul>
+								<br/>
+							</li>
+							<li class="fragment">Install external scripts via npm modules
+								<ul>
+									<li>Edit <code>external-scripts.json</code> to register the script</li>
+								</ul>
+								<br/>
+							</li>
+							<li class="fragment">Place scripts in <code>my-bot/scripts</code>
+							</li>
+						</ol>
+					</p>
+				</section>
+				<section>
+					<h2>What can Hubot do?</h2>
+					<p>
+						<ul>
+							<li><code>robot.respond</code> - respond to message sent to <b>Hubot</b> (by name)</li>
+							<li><code>robot.hear</code> - "hear" messages in chatroom</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<section>
+						<h2>What else can Hubot do?</h2>
+						<p><br/></p>
+<!--						<p>So, all <b>Node.js</b> <b>HTTP</b> goodness is available!
+						</p>-->
+						<p>
+							<ul>
+								<li><code>robot.http</code> - Make HTTP GET/POST requests</li>
+								<li><code>robot.router<sup>*</sup></code> - Accept HTTP GET/POST requests</li>
+							</ul>
+						</p>
+						<p>&nbsp;</p>
+						<p><code><sup>*</sup>robot.router</code> is an instance of an <b>express</b> application</p>
+						<aside class="notes">
+							Hubot runs on <b>Node.js</b>!
+							So, all Node.js HTTP goodness is available!
+						</aside>
+
+					</section>
+				</section>
+				<section>
+					<h2>Now We're Ready to Begin</h2>
+					<p>
+						<ul>
+							<li>Pre-requisites installed
+								<br/>
+								<br/>
+							</li>
+							<li>Know how/where to install Hubot scripts
+								<br/>
+								<br/>
+							</li>
+							<li>Have some idea of what we can do with Hubot
+							</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h2>Anatomy of a Hubot script</h2>
+					<p>
+						Export as a <b>node.js</b> module.
+						</p> 
+					<p>You <b>must</b> export as a function, not an object!</p>
+					<p>
+						<pre><code>module.exports = (robot) ->
+  robot.respond /someCmd/i, (msg) ->
+    # msg is a Hubot Response object
+    # send message when a user types "hubot someCmd"
+    msg.send 'Do you even RegEx?'</code></pre>
+					</p>
+
+				</section>
+				<section>
+					<h2>robot.respond</h2>
+					<p>React when command is sent directly to <b>hubot</b> by name! 
+						<pre><code>module.exports = (robot) ->
+  robot.respond /okcjs/i, (msg) ->
+    msg.send 'Yay! Lightning Talks!'</code></pre>
+					</p>
+					<p class="fragment"><img width="481" height="101" src="images/demo.respond.example.png" alt="screenshot of HipChat convo to demo 'hubot okcjs' command and robot.respond"></p>
+				</section>
+				<section>
+					<h2>msg.random</h2>
+					<p>
+						Use <code>msg.random</code> to avoid sending same message each time.
+						<pre class="middle"><code>greetings = [
+  'Yay! Lightning Talks!'
+  'Yay! OKC.js!'
+  'The 1st rule of OKC.js is you must talk about OKC.js!'
+]
+
+module.exports = (robot) ->
+  robot.respond /okcjs/i, (msg) ->
+    msg.send msg.random greetings</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>msg.random results</h2>
+					<p class="fragment1"><img width="858" height="222" src="images/demo.random.example.png" alt="screenshot of HipChat convo to demo msg.random"></p>
+				</section>
+				<section>
+					<h2>msg.match</h2>
+					<p>
+						Use <code>msg.match</code> to get your <b>regex</b> on! 
+						<pre class="middle"><code class="less-bigger1 smaller">help = [
+  'hubot okcjs - send thoughtful message about OKC.js and/or Lightning Talks'
+  'hubot okcjs help - send this list of help'
+]
+module.exports = (robot) ->
+  robot.respond /okcjs(\s*)?(help)?/i, (msg) ->
+    cmd = msg.match[2] or null
+    unless cmd?
+      msg.send msg.random greetings
+      return
+    msg.send help.join '\n'</code></pre>
+					</p>
+					<aside class="notes">
+						* msg.match gives you access to all the regex capture groups
+						* msg.match[0] is the "full command" such as 'hubot okcjs help'
+					</aside>
+
+				</section>
+				<section>
+					<h2>msg.match results</h2>
+					<p class="fragment1"><img width="1156" height="490" src="images/demo.msg.match.biggerexample.png" alt="screenshot of HipChat convo to demo msg.match"></p>
+				</section>
+				<section>
+					<h2>robot.hear</h2>
+					<p>React on a regex match hubot is "listening" to! 
+						<pre><code>module.exports = (robot) ->
+  robot.hear /thunder plains/i, (msg) ->
+    msg.send 'Get all the deets on Thunder Plains:' +
+    ' http://thunderplainsconf.com/'</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>robot.hear results</h2>
+					<p class="fragment1"><img width="1116" height="222" src="images/demo.hear.example.png" alt="screenshot of HipChat convo to demo robot.hear"></p>
+				</section>
+				<section>
+					<h2>msg.reply</h2>
+					<p>
+						When you want to "@" reply the sender.
+						<pre><code>module.exports = (robot) ->
+  robot.hear /thunder plains/i, (msg) ->
+    msg.send 'Get all the deets on Thunder Plains:' +
+    ' http://thunderplainsconf.com/'
+    msg.reply 'You should ask about the after party.'</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>msg.reply results</h2>
+					<p class="fragment1"><img width="1020" height="152" src="images/demo.reply.example.png" alt="screenshot of HipChat convo to demo msg.reply"></p>
+				</section>
+				<section>
+					<h2>msg.emote</h2>
+					<p>
+						<code>emote</code> is not supported by all adapters.
+					</p>
+					<p>
+						<pre><code>module.exports = (robot) ->
+  robot.hear /want to attend Backyard.js/i, (msg) ->
+    msg.emote 'sends Backyard.js tix'</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>msg.emote results</h2>
+					<p class="fragment1"><img width="1008" height="108" src="images/demo.emote.example.png" alt="screenshot of HipChat convo to demo msg.emote"></p>
+
+				</section>
+				<section>
+					<h2><code>require</code> your own scripts</h2>
+					<h4>okcjs-demo.coffee</h4>
+					<p class="fragment">
+						<pre class="middle"><code>greetings   = require './okcjs-demo-greetings'
+module.exports = (robot) ->
+  robot.respond /okcjs/i, (msg) ->
+    msg.send msg.random greetings()</code></pre>
+					</p>
+					<h4>okcjs-demo.greetings.coffee</h4>
+					<p>
+						<pre class="middle"><code>greetings = [
+  "Yay! Lightning Talks!"
+  "The 1st rule of OKC.js is you must talk about OKC.js!"
+  "Yay! OKC.js!"
+  "Woot! OKC.js!"
+]
+module.exports = ->
+  return greetings</code></pre>
+					</p>
+				</section>
+
+				<section>
+					<h2>robot.http.get</h2>
+					<p>Make simple HTTP GET to receive JSON data.
+						<pre class="smaller"><code class="less-bigger1 smaller">demoGetUrl = 'https://api.canary.io/checks/https-github.com/measurements' 
+module.exports = (robot) ->
+  robot.respond /okcjs(\s*)?(\S*)?/i, (msg) ->
+    cmd = msg.match[2] or null
+    if 'demoget'.localeCompare(cmd) is 0
+      robot.http(demoGetUrl)
+        .get() (err, res, body) ->
+          msg.send JSON.parse(body).length + " records received"
+    else if 'help'.localeCompare(cmd) is 0
+      msg.send help.join '\n'
+    else
+      msg.send msg.random greetings</code></pre>
+					</p>
+					<p class="fragment"><img width="480" height="101" src="images/demo.http.get.example.png" alt="screenshot of HipChat convo to demo robot.http.get"></p>
+				</section>
+				<section>
+					<h2>robot.router.get</h2>
+					<p>Receive external HTTP GET request. Env var <code>PORT</code> must be set.
+						<pre class="smaller"><code class="less-bigger1 smaller">querystring = require 'querystring'
+module.exports = (robot) ->
+  robot.router.get '/hubot/okcjs', (req, res) ->
+    q = querystring.parse req._parsedUrl.query
+    user = {}
+    user.type = 'groupchat'
+    user.room = q.room or '109614_playground@conf.hipchat.com'
+
+    robot.send user, q.msg
+    res.end "GET: received '#{q.msg}'"</code></pre>
+					</p>
+				</section>
+				<section>
+					<h2>robot.router.get results</h2>
+					<p class="fragment1"><img width="948" height="120" src="images/demo.router.get.external.example.png" alt="screenshot of web brower making GET request to demo external request to robot.router.get"><br/><img width="482" height="156" src="images/demo.router.get.example.png" alt="screenshot of HipChat convo to demo robot.router.get"></p>
+				</section>
+				<section>
+					<h2>Love your users!</h2>
+					<ul>
+						<li>Add documentation to header of your script</li>
+						<li>Add your own <code>help</code> command</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Documentation Example</h2>
+					<p>Follow the TomDoc<sup>*</sup> conventions and <b>Hubot</b> automagically adds your commands to <code>hubot help</code> output.
+						<pre class="smaller"><code class="smaller"># Description:
+#   A simple demo script to show off Hubot
+#
+# Dependencies:
+#   none
+#
+# Commands:
+#   hubot okcjs - send thoughtful message about OKC.js and/or Lightning Talks
+#   hubot okcjs demoget - return info about simple HTTP GET request
+#   thunder plains - send Thunder Plains info
+#   want to attend Backyard.js - emote Backyard.js tix
+#   hubot okcjs help - send this list of help
+#
+# URLS:
+#   GET /hubot/okcjs?msg=&lt;msg&gt;[&amp;room=&lt;room&gt;]
+#
+# Notes:
+#   Presented at OKC.js Lightning Talks on Aug 19, 2014
+#
+# Author:
+#   ryoe</code></pre></p>
+<p><a href="http://tomdoc.org/"><sup>*</sup> http://tomdoc.org/</a></p>
+				</section>
+				<section>
+					<h2><code>hubot help</code> madness</h2>
+					<p class="fragment1"><img width="1452" height="1274" src="images/demo.hubot-help.png" alt="screenshot of HipChat convo showing hubot help"></p>
+				</section>
+				<section>
+					<h2><code>help</code> command example</h2>
+					<p>Show the specific sub-set of commands in your script.
+						<pre class="middle"><code class="less-bigger1 smaller">help = [
+  'hubot okcjs - send thoughtful message about OKC.js and/or Lightning Talks'
+  'thunder plains - send Thunder Plains info'
+  'want to attend Backyard.js - emote Backyard.js tix'
+  'hubot okcjs help - send this list of help'
+]
+module.exports = (robot) ->
+  robot.respond /okcjs(\s*)?(help)?/i, (msg) ->
+    cmd = msg.match[2] || null
+    unless cmd?
+      msg.send msg.random greetings
+      return
+    msg.send help.join '\n'</code></pre>
+					</p>
+					<!--
+					<p class="fragment1"><img width="1008" height="108" src="images/demo.match.example.png" alt="screenshot of HipChat convo to demo msg.match"></p>
+				-->
+				</section>
+				<section>
+					<h2><code>okcjs help</code> command output</h2>
+					<p class="fragment1"><img width="1130" height="214" src="images/demo.match.example.png" alt="screenshot of HipChat convo showing hubot okcjs help"></p>
+
+				</section>
+				<section>
+					<h2>More things can Hubot do. Maybe.</h2>
+					<p>&nbsp;</p>
+					<p>
+						<ul>
+							<li><code>robot.brain</code> - in memory key-value store</li>
+							<li><code>robot.emit<sup>*</sup></code> - emit an event</li>
+							<li><code>robot.on<sup>*</sup></code> - listen for an emitted an event</li>
+							<li><code>robot.topic<sup>**</sup></code> - room topic changes</li>
+							<li><code>robot.enter<sup>**</sup></code> - a user enters the room</li>
+							<li><code>robot.leave<sup>**</sup></code> - a user leaves the room</li>
+						</ul>
+					</p>
+					<p>&nbsp;</p>
+					<p><sup>*</sup> from Node.js <b>EventEmitter</b> </p>
+					<p><sup>**</sup> Adapter support will vary. But look very shenanigans friendly!
+					</p>
+				</section>
+				<section>
+					<h1>Thank You!</h1>
+					<h1>&nbsp;</h1>
+					<h3>Hubot Scripts: How to train your robot</h3>
+					<h4>An OKC.js lightning talk</h4>
+				<p>&nbsp;</p>
+				<p>
+					<strong>Comments or Questions?</strong></br>
+					<a href="http://twitter.com/ryoe_ok">@ryoe_ok on Twitter</a><br/>
+					<a href="https://github.com/ryoe">ryoe on GitHub</a>
+				</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
